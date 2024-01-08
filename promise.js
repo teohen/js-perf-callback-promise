@@ -10,29 +10,28 @@ const observer = new PerformanceObserver((list) => {
 observer.observe({ entryTypes: ["measure"], buffer: true })
 
 
-const time = () => {
+const time = (res) => {
    const obj = {
     id: 1
    }
    array.push(obj)
+    res()
 }
 
 function perf_promise() {
     new Promise((res, _) => {
-        time()
-        res()
+        time(res)
     })
 }
 
 function obs(loop) {
     console.log('Running promise test')
-    performance.mark('start');
+    performance.mark('start')
     for (let i = 0; i < loop; i++){
         perf_promise()
     }
-    performance.mark('end');
-    performance.measure('perf_promise', 'start', 'end');
-    console.log('Size', array.length)
+    performance.mark('end')
+    performance.measure('perf_promise', 'start', 'end')
 }
 
 module.exports = obs

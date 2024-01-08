@@ -1,7 +1,6 @@
 const { performance, PerformanceObserver } = require('perf_hooks')
 
 const array = []
-// Create a PerformanceObserver to collect performance entries
 const observer = new PerformanceObserver((list) => {
     const entries = list.getEntries();
     entries.forEach((entry) => {
@@ -19,8 +18,7 @@ const time = () => {
 
 function perf_callback(performance, loop) {
     for (let i = 0; i < loop; i++) {
-        time(() => {
-        })
+        time(() => {})
     }
     performance.mark('end');
     performance.measure('perf_callback', 'start', 'end');
@@ -30,7 +28,7 @@ function obs(loop) {
     console.log('Running callback test')
     performance.mark('start');
     perf_callback(performance, loop)
-    console.log('Size', array.length)
+    console.log(process.memoryUsage())
 }
 
 module.exports = obs
